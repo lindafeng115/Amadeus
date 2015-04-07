@@ -55,3 +55,9 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# ingnore large bz2 files
+*.bz2
+
+# ignore authentication info
+myauthenticationdata.py
