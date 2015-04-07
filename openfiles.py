@@ -47,7 +47,7 @@ def open_csv(url):
     :rtype : csv.reader object
     """
     input_file = open_decrypted_file(url)
-    iter_csv = pd.read_csv(input_file, sep="^", iterator=True, chunksize=100000, parse_dates=True)
+    iter_csv = pd.read_csv(input_file, sep="^", iterator=True, chunksize=100000, parse_dates=True, na_filter=False)
     # open the csv file and read it
     return iter_csv
 
