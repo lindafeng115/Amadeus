@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from myauthenticationdata import authenticate_open, path
+from myauthenticationdata import path, dir_user, dir_passwd
 import urllib.request
 import re
 import bz2
@@ -61,3 +61,18 @@ def download_it(url):
     urllib.request.urlretrieve(full_path, filename=url)
     print("Downloaded file %s to %s" % (full_path, url))
     return
+
+
+def authenticate_open(url):
+    """
+    create an authentication opener for urllib
+    :return: None
+    """
+
+    password_manager = urllib.request.HTTPPasswordMgrWithDefaultRealm()
+    password_manager.add_password(None, path, dir_user, dir_passwd)
+    auth_manager = urllib.request.HTTPBasicAuthHandler(password_manager)
+    opener = urllib.request.build_opener(auth_manager)
+    urllib.request.install_opener(opener)
+    response = urllib.request.urlopen(url)
+    return response
